@@ -1,4 +1,5 @@
 ﻿using Desafio.Domain.Entidades;
+using Desafio.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -25,7 +26,7 @@ namespace Desafio.Data.Mappings
                 v.Property(x => x.Valor)
                 .HasMaxLength(50)
                 .IsRequired()
-                .HasColumnType("varchar(50)");
+                .HasColumnType("VARCHAR(50)");
 
                 v.HasIndex(x => x.Valor)
                 .IsUnique();
@@ -39,7 +40,7 @@ namespace Desafio.Data.Mappings
 
             builder.Property(c => c.Status)
                 .IsRequired()
-                .HasColumnType("");
+                .HasConversion(v => v.ToString(), v => (EStatus)Enum.Parse(typeof(EStatus), v));
         }
     }
 }

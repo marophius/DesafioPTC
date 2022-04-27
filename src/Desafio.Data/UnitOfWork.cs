@@ -1,5 +1,4 @@
-﻿using Desafio.Data.Interfaces;
-using Desafio.Data.Repositories;
+﻿using Desafio.Data.Repositories;
 using Desafio.Domain.Entidades;
 using Desafio.Domain.Interfaces;
 using System;

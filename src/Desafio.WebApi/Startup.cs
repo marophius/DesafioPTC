@@ -1,4 +1,5 @@
 ﻿using Desafio.Data;
+using Desafio.WebApi.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Desafio.WebApi
@@ -19,6 +20,8 @@ namespace Desafio.WebApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddAutoMapper(typeof(Startup));
+            services.ResolveDependencies();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)

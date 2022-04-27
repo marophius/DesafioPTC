@@ -1,4 +1,5 @@
 ﻿using Desafio.Domain.Entidades;
+using Desafio.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -28,7 +29,7 @@ namespace Desafio.Data.Mappings
             builder.Property(x => x.Modelo)
                 .HasMaxLength(20)
                 .IsRequired()
-                .HasColumnType("varchar(20)");
+                .HasColumnType("VARCHAR(20)");
 
             builder.Property(x => x.Quilometragem)
                 .IsRequired()
@@ -36,7 +37,7 @@ namespace Desafio.Data.Mappings
 
             builder.Property(x => x.Renavam)
                 .IsRequired()
-                .HasColumnType("int");
+                .HasColumnType("INT");
 
             builder.Property(x => x.Valor)
                 .IsRequired()
@@ -50,6 +51,10 @@ namespace Desafio.Data.Mappings
 
             builder.HasIndex(x => x.Renavam)
                 .IsUnique();
+
+            builder.Property(c => c.Status)
+                .IsRequired()
+                .HasConversion(v => v.ToString(), v => (EVeiculoStatus)Enum.Parse(typeof(EVeiculoStatus), v));
 
             builder.ToTable("Veiculos");
 

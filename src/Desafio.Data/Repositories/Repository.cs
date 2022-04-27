@@ -1,5 +1,4 @@
-﻿using Desafio.Data.Interfaces;
-using Desafio.Domain.Entidades;
+﻿using Desafio.Domain.Entidades;
 using Desafio.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
