@@ -19,6 +19,7 @@ namespace Desafio.Domain.ValueObject
 
         public string Cep { get;  set; }
         public string State { get; set; }
+        public string City { get; set; }
         public string NeighborHood { get; set; }
         public string Street { get; set; }
         public string Service { get; set; }
