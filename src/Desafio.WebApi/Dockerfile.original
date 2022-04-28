@@ -7,8 +7,6 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Desafio.WebApi/Desafio.WebApi.csproj", "src/Desafio.WebApi/"]
-COPY ["src/Desafio.Domain/Desafio.Domain.csproj", "src/Desafio.Domain/"]
-COPY ["src/Desafio.Data/Desafio.Data.csproj", "src/Desafio.Data/"]
 RUN dotnet restore "src/Desafio.WebApi/Desafio.WebApi.csproj"
 COPY . .
 WORKDIR "/src/src/Desafio.WebApi"

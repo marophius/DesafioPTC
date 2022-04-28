@@ -18,6 +18,8 @@ namespace Desafio.Data.Repositories
         {
         }
 
+        
+
         public async Task<Marca> AtivarStatus(Guid id)
         {
             var marca = await BuscarPorId(id);

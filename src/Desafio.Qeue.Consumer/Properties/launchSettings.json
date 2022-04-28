@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Desafio.Qeue.Consumer": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
