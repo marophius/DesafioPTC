@@ -43,6 +43,8 @@ namespace Desafio.WebApi.Controllers
         {
             try
             {
+                if(id == Guid.Empty) return NotFound("O Id não pode ser nulo");
+
                 var marca = _mapper.Map<MarcaViewModel>(await _repository.BuscarPorId(id));
 
                 if (marca == null) return NotFound();
@@ -93,22 +95,29 @@ namespace Desafio.WebApi.Controllers
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<MarcaViewModel>> AlterarStatus(Guid id, MarcaViewModel marca)
         {
-            if(id != marca.Id)
+            try
             {
-                NotificarErro("O Id informado não é o mesmo que foi passado na query");
-                return CustomResponse(marca);
-            }
+                if (id != marca.Id)
+                {
+                    NotificarErro("O Id informado não é o mesmo que foi passado na query");
+                    return CustomResponse(marca);
+                }
 
-            if(!ModelState.IsValid) return CustomResponse(marca);
+                if (!ModelState.IsValid) return CustomResponse(marca);
 
-            if(marca.Status == EStatus.Ativo)
+                if (marca.Status == EStatus.Ativo)
+                {
+                    var marcaCancelada = await _repository.CancelarStatus(marca.Id);
+                    return CustomResponse(marcaCancelada);
+                }
+
+                var marcaAtiva = await _repository.AtivarStatus(marca.Id);
+                return CustomResponse(marcaAtiva);
+
+            }catch(Exception ex)
             {
-                await _repository.CancelarStatus(marca.Id);
-                return CustomResponse(marca);
+                return NotFound("Nenhuma marca encontrada com este Id!");
             }
-
-            await _repository.AtivarStatus(marca.Id);
-            return CustomResponse(marca);
         }
     }
 }

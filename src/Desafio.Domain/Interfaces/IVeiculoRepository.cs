@@ -11,5 +11,7 @@ namespace Desafio.Domain.Interfaces
     {
         Task<Veiculo> BuscarPorRenavam(int renavam);
         Task AtualizarVeiculo(Guid id, Veiculo veiculo);
+        Task<Veiculo> AlterarStatusVendido(Guid id);
+        Task<Veiculo> AlterarStatusIndisponivel(Guid id);
     }
 }

@@ -98,43 +98,57 @@ namespace Desafio.WebApi.Controllers
             [FromBody]ProprietarioViewModel proprietario
             )
         {
-            if (id != proprietario.Id)
+            try
             {
-                NotificarErro("O Id informado não é o mesmo que foi passado na query");
-                return CustomResponse(proprietario);
-            }
+                if (id != proprietario.Id)
+                {
+                    NotificarErro("O Id informado não é o mesmo que foi passado na query");
+                    return CustomResponse(proprietario);
+                }
 
-            if (!ModelState.IsValid) return CustomResponse(proprietario);
+                if (!ModelState.IsValid) return CustomResponse(proprietario);
 
-            if (proprietario.Status == EStatus.Ativo)
+                if (proprietario.Status == EStatus.Ativo)
+                {
+                    var proprietarioCancelado = _mapper.Map<ProprietarioViewModel>(await _repository.CancelarStatus(id));
+                    return CustomResponse(proprietarioCancelado);
+                }
+
+                var proprietarioAtivo = _mapper.Map<ProprietarioViewModel>(await _repository.AtivarStatus(id));
+                return CustomResponse(proprietarioAtivo);
+
+            }catch (Exception ex)
             {
-                await _repository.CancelarStatus(proprietario.Id);
-                return CustomResponse(proprietario);
+                return NotFound("Nenhum proprietário encontrado com este Id");
             }
-
-            await _repository.AtivarStatus(proprietario.Id);
-            return CustomResponse(proprietario);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<ProprietarioViewModel>> AtualizarProprietario(
+        public async Task<ActionResult> AtualizarProprietario(
             [FromRoute] Guid id,
             [FromBody] ProprietarioViewModel proprietario
             )
         {
-            if (id != proprietario.Id)
+            try
             {
-                NotificarErro("O Id informado não é o mesmo que foi passado na query");
-                return CustomResponse(proprietario);
+                if (id != proprietario.Id)
+                {
+                    NotificarErro("O Id informado não é o mesmo que foi passado na query");
+                    return CustomResponse(proprietario);
+                }
+
+                if (!ModelState.IsValid) return CustomResponse(proprietario);
+
+                var proprietarioEndereco = await BuscarEndereco(proprietario);
+
+                await _service.Atualizar(_mapper.Map<Proprietario>(proprietarioEndereco));
+
+                return Ok("Proprietário atualizado!");
+
+            }catch (Exception ex)
+            {
+                return NotFound("Nenhum proprietário encontrado!");
             }
-
-            if (!ModelState.IsValid) return CustomResponse(proprietario);
-
-            var proprietarioEndereco = await BuscarEndereco(proprietario);
-
-            await _service.Atualizar(_mapper.Map<Proprietario>(proprietarioEndereco));
-
-            return CustomResponse(proprietario);
         }
 
         public async Task<ProprietarioViewModel> BuscarEndereco(ProprietarioViewModel proprietario)

@@ -12,8 +12,6 @@ namespace Desafio.Domain.Validators
     {
         public VeiculoValidator()
         {
-            RuleFor(v => v.Id)
-                .NotEqual(Guid.Empty).WithMessage("O campo {PropertyName} não pode ser vazio!");
             RuleFor(v => v.MarcaId)
                 .NotEqual(Guid.Empty).WithMessage("O campo {PropertyName} não pode ser vazio!");
             RuleFor(v => v.ProprietarioId)

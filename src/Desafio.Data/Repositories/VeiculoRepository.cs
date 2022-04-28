@@ -17,6 +17,32 @@ namespace Desafio.Data.Repositories
         {
         }
 
+        public async Task<Veiculo> AlterarStatusIndisponivel(Guid id)
+        {
+            var veiculo = await BuscarPorId(id);
+
+            if (veiculo == null) return null;
+
+            veiculo.StatusIndisponivel();
+
+            await Atualizar(veiculo);
+
+            return veiculo;
+        }
+
+        public async Task<Veiculo> AlterarStatusVendido(Guid id)
+        {
+            var veiculo = await BuscarPorId(id);
+
+            if (veiculo == null) return null;
+
+            veiculo.StatusVendido();
+
+            await Atualizar(veiculo);
+
+            return veiculo;
+        }
+
         public async Task AtualizarVeiculo(Guid id, Veiculo veiculo)
         {
             var veiculoAntigo = await BuscarPorId(id);

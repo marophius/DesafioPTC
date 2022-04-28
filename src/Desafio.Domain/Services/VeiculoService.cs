@@ -1,4 +1,5 @@
 ﻿using Desafio.Domain.Entidades;
+using Desafio.Domain.Enums;
 using Desafio.Domain.Interfaces;
 using Desafio.Domain.Notificacoes;
 using Desafio.Domain.Validators;
@@ -14,18 +15,28 @@ namespace Desafio.Domain.Services
     public class VeiculoService : BaseService, IVeiculoService
     {
         private readonly IVeiculoRepository _repository;
+        private readonly IMarcaRepository _marcaRepository;
+        private readonly IProprietarioRepository _proprietarioRepository;
 
         public VeiculoService(
             INotificador notificador,
-            IVeiculoRepository repository) : base(notificador)
+            IVeiculoRepository repository,
+            IMarcaRepository marcaRepository,
+            IProprietarioRepository proprietarioRepository) : base(notificador)
         {
             _repository = repository;
+            _marcaRepository = marcaRepository;
+            _proprietarioRepository = proprietarioRepository;
         }
 
         public async Task<bool> Adicionar(Veiculo veiculo)
         {
-            if (!ExecutarValidacao(new VeiculoValidator(), veiculo)
-                || !ExecutarValidacao(new ProprietarioValidator(), veiculo.Proprietario) || !ExecutarValidacao(new MarcaValidator(), veiculo.Marca)) return false;
+            if (!ExecutarValidacao(new VeiculoValidator(), veiculo)) return false;
+
+            var marcaValida = await VerificarMarca(veiculo.MarcaId);
+            var proprietarioValido = await VerificarProprietario(veiculo.ProprietarioId);
+
+            if (!marcaValida || !proprietarioValido) return false;
 
             if (_repository.Buscar(f => f.Renavam == veiculo.Renavam).Result.Any())
             {
@@ -71,6 +82,37 @@ namespace Desafio.Domain.Services
             }
 
             await _repository.AtualizarVeiculo(veiculo.Id, veiculo);
+            return true;
+        }
+
+        public async Task<bool> VerificarMarca(Guid id)
+        {
+            if (id == Guid.Empty || id == null) return false;
+
+            var marca = await _marcaRepository.BuscarPorId(id);
+
+            if (marca == null || marca.Status == EStatus.Cancelado)
+            {
+                Notificar("Não é possível cadastrar um veículo sem uma marca ou com uma marca cancelada!");
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> VerificarProprietario(Guid id)
+        {
+            if (id == Guid.Empty || id == null) return false;
+
+            var proprietario = await _proprietarioRepository.BuscarPorId(id);
+
+            if (proprietario == null || proprietario.Status == EStatus.Cancelado)
+            {
+                Notificar("Não é possível cadastrar um veículo sem um proprietário ou com um proprietário cancelado!");
+                return false;
+            }
+
             return true;
         }
     }

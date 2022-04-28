@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Desafio.Domain.Entidades;
+using Desafio.Domain.Enums;
 using Desafio.Domain.Interfaces;
 using Desafio.Domain.Notificacoes;
 using Desafio.WebApi.ViewModels;
@@ -49,6 +50,19 @@ namespace Desafio.WebApi.Controllers
             return Ok(veiculo);
         }
 
+        [HttpGet("{renavam:int}")]
+
+        public async Task<ActionResult<VeiculoViewModel>> ObterPorRenavam([FromRoute] int renavam)
+        {
+            if (renavam == 0) return BadRequest("O renavam não pode ser vazio!");
+
+            var veiculo = _mapper.Map<VeiculoViewModel>(await _repository.BuscarPorRenavam(renavam));
+
+            if (veiculo == null) return NotFound("Nenhum veiculo encontrado");
+
+            return Ok(veiculo);
+        }
+
         [HttpPost]
         public async Task<ActionResult<VeiculoViewModel>> AdicionarVeiculo(
             [FromBody] VeiculoViewModel veiculo
@@ -58,7 +72,7 @@ namespace Desafio.WebApi.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest();
 
-                await _service.Adicionar(_mapper.Map<Veiculo>(veiculo));
+                var cadastroValido = await _service.Adicionar(_mapper.Map<Veiculo>(veiculo));
 
                 return CustomResponse(veiculo);
 
@@ -69,23 +83,71 @@ namespace Desafio.WebApi.Controllers
             }
         }
 
-        [HttpPut("atualizar-veiculo/{id:guid}")]
+        [HttpPut("{id:guid}")]
         public async Task<ActionResult<ProprietarioViewModel>> AtualizarVeiculo(
             [FromRoute] Guid id,
             [FromBody] VeiculoViewModel veiculo
             )
         {
-            if (id != veiculo.Id)
+            try
             {
-                NotificarErro("O Id informado não é o mesmo que foi passado na query");
+                if (id != veiculo.Id)
+                {
+                    NotificarErro("O Id informado não é o mesmo que foi passado na query");
+                    return CustomResponse(veiculo);
+                }
+
+                if (!ModelState.IsValid) return CustomResponse(veiculo);
+
+                await _service.Atualizar(_mapper.Map<Veiculo>(veiculo));
+
                 return CustomResponse(veiculo);
+
+            }catch (Exception ex)
+            {
+                return NotFound("Nenhum veículo encontrado");
             }
-
-            if (!ModelState.IsValid) return CustomResponse(veiculo);
-
-            await _service.Atualizar(_mapper.Map<Veiculo>(veiculo));
-
-            return CustomResponse(veiculo);
         }
+
+        [HttpPut("alterar-status/{id:guid}/{status:int}")]
+        public async Task<ActionResult<ProprietarioViewModel>> AlterarStatusVeiculo(
+            [FromRoute] Guid id,
+            [FromRoute] int status,
+            [FromBody] VeiculoViewModel veiculo
+            )
+        {
+            try
+            {
+                if (id != veiculo.Id)
+                {
+                    NotificarErro("O Id informado não é o mesmo que foi passado na query");
+                    return CustomResponse(veiculo);
+                }
+
+                if (!ModelState.IsValid) return CustomResponse(veiculo);
+
+                if((veiculo.Status == EVeiculoStatus.Disponivel || veiculo.Status == EVeiculoStatus.Vendido) && status == 1)
+                {
+                   var veiculoIndisponivel =  await _repository.AlterarStatusIndisponivel(veiculo.Id);
+
+                    return CustomResponse(veiculoIndisponivel);
+                }
+                if((veiculo.Status == EVeiculoStatus.Disponivel || veiculo.Status == EVeiculoStatus.Indisponivel) && status == 2)
+                {
+                    var veiculoVendido = await _repository.AlterarStatusVendido(veiculo.Id);
+
+                    return CustomResponse(veiculoVendido);
+                }
+
+                return BadRequest("Não foi possível alterar o status do veículo!");
+
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Nenhum veículo encontrado");
+            }
+        }
+
+
     }
 }

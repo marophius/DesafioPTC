@@ -18,28 +18,31 @@ namespace Desafio.Data.Repositories
         {
         }
 
-        public async Task AtivarStatus(Guid id)
+        public async Task<Proprietario> AtivarStatus(Guid id)
         {
 
             var proprietario = await BuscarPorId(id);
 
-            if (proprietario == null) return;
+            if (proprietario == null) return null;
 
             proprietario.Ativar();
 
             await Atualizar(proprietario);
+
+            return proprietario;
         }
 
-        public async Task AtualizarProprietario(Guid id, Proprietario proprietario)
+        public async Task<Proprietario> AtualizarProprietario(Guid id, Proprietario proprietario)
         {
             var proprietarioAntigo = await BuscarPorId(id);
 
-            if (proprietarioAntigo == null) return;
+            if (proprietarioAntigo == null) return null;
 
             proprietarioAntigo.Alterar(proprietario.Nome, proprietario.Documento, proprietario.Email, proprietario.Endereco);
 
             await Atualizar(proprietarioAntigo);
 
+            return proprietario;
         }
 
         public async Task<Proprietario> BuscarPorDocumento(int documento)
@@ -48,15 +51,17 @@ namespace Desafio.Data.Repositories
             return proprietario;
         }
 
-        public async Task CancelarStatus(Guid id)
+        public async Task<Proprietario> CancelarStatus(Guid id)
         {
             var proprietario = await BuscarPorId(id);
 
-            if(proprietario == null) return;
+            if(proprietario == null) return null;
 
             proprietario.Cancelar();
 
             await Atualizar(proprietario);
+
+            return proprietario;
         }
 
         public async Task<List<Proprietario>> SomenteAtivos()

@@ -10,8 +10,8 @@ namespace Desafio.Domain.Interfaces
     public interface IMarcaRepository : IRepository<Marca>
     {
         Task<Marca> BuscarPorNome(string nome);
-        Task AtivarStatus(Guid Id);
-        Task CancelarStatus(Guid Id);
+        Task<Marca> AtivarStatus(Guid Id);
+        Task<Marca> CancelarStatus(Guid Id);
         Task<List<Marca>> SomenteAtivos();
     }
 }

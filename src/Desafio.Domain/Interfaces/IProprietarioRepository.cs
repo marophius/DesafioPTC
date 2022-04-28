@@ -10,9 +10,9 @@ namespace Desafio.Domain.Interfaces
     public interface IProprietarioRepository : IRepository<Proprietario>
     {
         Task<Proprietario> BuscarPorDocumento(int documento);
-        Task AtivarStatus(Guid id);
-        Task CancelarStatus(Guid id);
-        Task AtualizarProprietario(Guid id, Proprietario proprietario);
+        Task<Proprietario> AtivarStatus(Guid id);
+        Task<Proprietario> CancelarStatus(Guid id);
+        Task<Proprietario> AtualizarProprietario(Guid id, Proprietario proprietario);
         Task<List<Proprietario>> SomenteAtivos();
     }
 }

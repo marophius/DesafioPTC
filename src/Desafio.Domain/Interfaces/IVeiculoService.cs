@@ -11,5 +11,7 @@ namespace Desafio.Domain.Interfaces
     {
         Task<bool> Adicionar(Veiculo veiculo);
         Task<bool> Atualizar(Veiculo veiculo);
+        Task<bool> VerificarProprietario(Guid id);
+        Task<bool> VerificarMarca(Guid id);
     }
 }

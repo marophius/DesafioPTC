@@ -18,12 +18,16 @@ namespace Desafio.Data.Repositories
         {
         }
 
-        public async Task AtivarStatus(Guid id)
+        public async Task<Marca> AtivarStatus(Guid id)
         {
             var marca = await BuscarPorId(id);
+
+            if(marca == null) return null;
+
             marca.Ativar();
 
             await Atualizar(marca);
+            return marca;
         }
 
         public async Task<Marca> BuscarPorNome(string nome)
@@ -32,12 +36,14 @@ namespace Desafio.Data.Repositories
             return marca;
         }
 
-        public async Task CancelarStatus(Guid Id)
+        public async Task<Marca> CancelarStatus(Guid Id)
         {
             var marca = await BuscarPorId(Id);
+            if(marca == null) return null;
             marca.Cancelar();
 
             await Atualizar(marca);
+            return marca;
         }
 
         public async Task<List<Marca>> SomenteAtivos()
