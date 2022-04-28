@@ -26,7 +26,7 @@ namespace Desafio.WebApi.AutoMapper
             CreateMap<MarcaViewModel, Marca>()
                 .ConstructUsing(p => new Marca(new Nome(p.Nome), p.Status));
             CreateMap<ProprietarioViewModel, Proprietario>()
-                .ConstructUsing(p => new Proprietario(new Nome(p.Nome), p.Documento, p.Email, new Endereco(p.Cep, p.State, p.NeighborHood, p.Street, p.Service), p.Status));
+                .ConstructUsing(p => new Proprietario(new Nome(p.Nome), p.Documento, p.Email, new Endereco(p.Cep, p.State, p.NeighborHood, p.Street, p.Service, p.City), p.Status));
             CreateMap<VeiculoViewModel, Veiculo>()
                 .ConstructUsing(p => new Veiculo(p.ProprietarioId, p.Renavam, p.MarcaId, p.Modelo, p.AnoFabricacao, p.AnoModelo, p.Quilometragem, p.Valor, p.Status));
 

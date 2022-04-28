@@ -8,13 +8,14 @@ namespace Desafio.Domain.ValueObject
 {
     public class Endereco
     {
-        public Endereco(string cep, string state, string neighborHood, string street, string service)
+        public Endereco(string cep, string state, string neighborHood, string street, string service, string city)
         {
             Cep = cep;
             State = state;
             NeighborHood = neighborHood;
             Street = street;
             Service = service;
+            City = city;
         }
 
         public string Cep { get;  set; }

@@ -20,7 +20,7 @@ namespace Desafio.Domain.Validators
                 .Length(5, 25).WithMessage("O campo {PropertyName} deve ter entre 5 e 25 caracteres");
             RuleFor(e => e.State)
                 .NotEmpty().WithMessage("O campo {PropertyName} não pode ser vazio!")
-                .Length(5, 15).WithMessage("O campo {PropertyName} deve ter entre 5 e 15 caracteres");
+                .MaximumLength(2).WithMessage("O campo {PropertyName} deve ter no máximo 2 caracteres");
             RuleFor(e => e.Cep)
                 .NotEmpty().WithMessage("O campo {PropertyName} não pode ser vazio!")
                 .Length(5, 25).WithMessage("O campo {PropertyName} deve ter entre 5 e 25 caracteres");

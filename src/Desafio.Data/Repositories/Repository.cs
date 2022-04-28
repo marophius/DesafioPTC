@@ -42,11 +42,6 @@ namespace Desafio.Data.Repositories
 
         public async Task Atualizar(T entity)
         {
-            if(_context.Entry(entity).State == EntityState.Detached)
-            {
-                _dbSet.Attach(entity);
-            }
-
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
             //await UnitOfWork.CommitAsync();
