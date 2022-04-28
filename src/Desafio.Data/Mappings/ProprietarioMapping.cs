@@ -36,6 +36,7 @@ namespace Desafio.Data.Mappings
                 n.Property(x => x.Valor)
                 .HasMaxLength(50)
                 .HasColumnType("VARCHAR(50)")
+                .HasColumnName("Nome")
                 .IsRequired();
             });
 
@@ -63,8 +64,8 @@ namespace Desafio.Data.Mappings
 
                 e.Property(x => x.State)
                 .IsRequired()
-                .HasMaxLength(20)
-                .HasColumnType("VARCHAR(20)");
+                .HasMaxLength(2)
+                .HasColumnType("VARCHAR(2)");
 
                 e.Property(x => x.City)
                 .IsRequired()

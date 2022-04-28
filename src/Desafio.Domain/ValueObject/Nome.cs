@@ -12,7 +12,7 @@ namespace Desafio.Domain.ValueObject
 
         public Nome(string valor)
         {
-            if (string.IsNullOrEmpty(valor))
+            if (!string.IsNullOrEmpty(valor))
             {
                 Valor = valor;
             }

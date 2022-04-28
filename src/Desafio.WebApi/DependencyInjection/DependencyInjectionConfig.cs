@@ -1,4 +1,5 @@
-﻿using Desafio.Data.Repositories;
+﻿using Desafio.Data;
+using Desafio.Data.Repositories;
 using Desafio.Domain.Interfaces;
 using Desafio.Domain.Notificacoes;
 using Desafio.Domain.Services;
@@ -16,6 +17,8 @@ namespace Desafio.WebApi.DependencyInjection
             services.AddScoped<IMarcaService, MarcaService>();
             services.AddScoped<IProprietarioService, ProprietarioService>();
             services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<DataContext>();
 
             return services;
         }

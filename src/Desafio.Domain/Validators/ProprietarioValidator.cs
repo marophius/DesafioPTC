@@ -12,8 +12,6 @@ namespace Desafio.Domain.Validators
     {
         public ProprietarioValidator()
         {
-            RuleFor(p => p.Id)
-                .NotEqual(Guid.Empty).WithMessage("O campo {PropertyName} não pode ser vazio!");
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage("O campo {PropertyName} não pode ser vazio!")
                 .Length(10, 35).WithMessage("O campo {PropertyName} deve ter entre 10 e 35 caracteres")

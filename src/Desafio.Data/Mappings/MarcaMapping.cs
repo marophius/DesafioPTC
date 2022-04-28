@@ -18,15 +18,14 @@ namespace Desafio.Data.Mappings
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Nome)
-                .HasColumnName("Nome");
 
             builder.OwnsOne(c => c.Nome, v =>
             {
                 v.Property(x => x.Valor)
                 .HasMaxLength(50)
                 .IsRequired()
-                .HasColumnType("VARCHAR(50)");
+                .HasColumnType("VARCHAR(50)")
+                .HasColumnName("Nome");
 
                 v.HasIndex(x => x.Valor)
                 .IsUnique();

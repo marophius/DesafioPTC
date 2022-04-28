@@ -12,7 +12,9 @@ namespace Desafio.Data.Repositories
 {
     public class MarcaRepository : Repository<Marca>, IMarcaRepository
     {
-        public MarcaRepository(DataContext context) : base(context)
+        public MarcaRepository(
+            DataContext context,
+            IUnitOfWork unitOfWork) : base(context, unitOfWork)
         {
         }
 

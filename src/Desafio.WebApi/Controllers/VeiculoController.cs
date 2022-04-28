@@ -15,7 +15,7 @@ namespace Desafio.WebApi.Controllers
         private readonly IVeiculoRepository _repository;
         private readonly IMapper _mapper;
 
-        protected VeiculoController(
+        public VeiculoController(
             INotificador notificador,
             IVeiculoService service,
             IVeiculoRepository repositorio,
@@ -50,7 +50,7 @@ namespace Desafio.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<VeiculoViewModel>> AdicionarProprietario(
+        public async Task<ActionResult<VeiculoViewModel>> AdicionarVeiculo(
             [FromBody] VeiculoViewModel veiculo
             )
         {
@@ -70,7 +70,7 @@ namespace Desafio.WebApi.Controllers
         }
 
         [HttpPut("atualizar-veiculo/{id:guid}")]
-        public async Task<ActionResult<ProprietarioViewModel>> AtualizarProprietario(
+        public async Task<ActionResult<ProprietarioViewModel>> AtualizarVeiculo(
             [FromRoute] Guid id,
             [FromBody] VeiculoViewModel veiculo
             )

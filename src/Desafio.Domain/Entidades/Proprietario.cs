@@ -19,6 +19,10 @@ namespace Desafio.Domain.Entidades
             _veiculos = new List<Veiculo>();
             Status = status;
         }
+        protected Proprietario()
+        {
+
+        }
 
         public Nome Nome { get; private set; }
         public int Documento { get; private set; }

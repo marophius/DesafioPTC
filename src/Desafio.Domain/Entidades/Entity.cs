@@ -8,7 +8,7 @@ namespace Desafio.Domain.Entidades
 {
     public abstract class Entity
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
         public Entity()
         {

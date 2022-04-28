@@ -10,7 +10,8 @@ namespace Desafio.WebApi.AutoMapper
         public AutoMapperConfig()
         {
             // Domain to VM
-            CreateMap<Marca, MarcaViewModel>();
+            CreateMap<Marca, MarcaViewModel>()
+                .ForMember(d => d.Nome, o => o.MapFrom(s => s.Nome.Valor));
             CreateMap<Proprietario, ProprietarioViewModel>()
                 .ForMember(d => d.Nome, o => o.MapFrom(s => s.Nome.Valor))
                 .ForMember(d => d.City, o => o.MapFrom(s => s.Endereco.City))

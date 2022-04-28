@@ -3,8 +3,11 @@ using Desafio.Domain.Entidades;
 using Desafio.Domain.Enums;
 using Desafio.Domain.Interfaces;
 using Desafio.Domain.Notificacoes;
+using Desafio.Domain.ValueObject;
 using Desafio.WebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Text.Json;
 
 namespace Desafio.WebApi.Controllers
 {
@@ -15,7 +18,7 @@ namespace Desafio.WebApi.Controllers
         private readonly IProprietarioService _service;
         private readonly IProprietarioRepository _repository;
         private readonly IMapper _mapper;
-        protected ProprietarioController(
+        public ProprietarioController(
             INotificador notificador,
             IProprietarioService service,
             IProprietarioRepository repository,
@@ -74,6 +77,7 @@ namespace Desafio.WebApi.Controllers
         {
             try
             {
+                await BuscarEndereco(proprietario);
                 if (!ModelState.IsValid) return BadRequest();
 
                 await _service.Adicionar(_mapper.Map<Proprietario>(proprietario));
@@ -128,6 +132,28 @@ namespace Desafio.WebApi.Controllers
             await _service.Atualizar(_mapper.Map<Proprietario>(proprietario));
 
             return CustomResponse(proprietario);
+        }
+
+        public async Task BuscarEndereco(ProprietarioViewModel proprietario)
+        {
+            if (
+                    string.IsNullOrEmpty(proprietario.State) &&
+                    string.IsNullOrEmpty(proprietario.City) &&
+                    string.IsNullOrEmpty(proprietario.Street) &&
+                    string.IsNullOrEmpty(proprietario.Service) &&
+                    string.IsNullOrEmpty(proprietario.NeighborHood))
+            {
+                var http = new HttpClient();
+                var response = await http.GetAsync($"https://brasilapi.com.br/api/cep/v1/{proprietario.Cep}");
+                var data = await response.Content.ReadFromJsonAsync<Endereco>();
+
+                proprietario.Street = data.Street;
+                proprietario.NeighborHood = data.NeighborHood;
+                proprietario.Service = data.Service;
+                proprietario.State = data.State;
+                proprietario.City = data.City;
+            }
+            return;
         }
     }
 }

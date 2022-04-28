@@ -12,7 +12,9 @@ namespace Desafio.Data.Repositories
 {
     public class ProprietarioRepository : Repository<Proprietario>, IProprietarioRepository
     {
-        public ProprietarioRepository(DataContext context) : base(context)
+        public ProprietarioRepository(
+            DataContext context,
+            IUnitOfWork unitOfWork) : base(context, unitOfWork)
         {
         }
 

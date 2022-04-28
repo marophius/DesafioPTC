@@ -12,15 +12,33 @@ namespace Desafio.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
+        private IUnitOfWork _unitOfWork;
         protected readonly DataContext _context;
         private DbSet<T> _dbSet;
-        public Repository(DataContext context)
+        private DataContext context;
+
+        public Repository(
+            DataContext context,
+            IUnitOfWork unitOfWork)
         {
             _context = context;
+            _unitOfWork = unitOfWork;
             _dbSet = context.Set<T>();
         }
 
-        public async Task Adicionar(T entity) => _dbSet.Add(entity);
+        public Repository(DataContext context)
+        {
+            this.context = context;
+        }
+
+        public IUnitOfWork UnitOfWork => (IUnitOfWork)_context;
+
+        public async Task Adicionar(T entity)
+        {
+            _dbSet.Add(entity);
+            await _context.SaveChangesAsync();
+            //await UnitOfWork.CommitAsync();
+        } 
 
         public async Task Atualizar(T entity)
         {
@@ -30,6 +48,8 @@ namespace Desafio.Data.Repositories
             }
 
             _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+            //await UnitOfWork.CommitAsync();
         }
 
         public async Task<List<T>> Buscar()

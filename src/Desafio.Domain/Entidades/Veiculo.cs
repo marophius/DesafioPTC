@@ -31,6 +31,11 @@ namespace Desafio.Domain.Entidades
             Valor = valor;
             Status = status;
         }
+
+        protected Veiculo()
+        {
+
+        }
         public Guid ProprietarioId { get; private set; }
         public Proprietario Proprietario { get; private set; }
         public int Renavam { get; private set; }

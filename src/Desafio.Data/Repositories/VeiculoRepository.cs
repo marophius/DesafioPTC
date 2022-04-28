@@ -11,7 +11,9 @@ namespace Desafio.Data.Repositories
 {
     public class VeiculoRepository : Repository<Veiculo>, IVeiculoRepository
     {
-        public VeiculoRepository(DataContext context) : base(context)
+        public VeiculoRepository(
+            DataContext context,
+            IUnitOfWork uow) : base(context, uow)
         {
         }
 
