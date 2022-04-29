@@ -11,19 +11,12 @@ namespace Desafio.Qeue.Consumer
     {
         public static void Main(string[] args)
         {
-            var factory = new ConnectionFactory() {
-                HostName = "localhost" , 
-                //Port = 15672,
-                //UserName = "guest",
-                //Password = "guest",
-                //Ssl =
-                //{
-                //    ServerName = "localhost" ,
-                //    Enabled = true 
-                //}
+            var factory = new ConnectionFactory(){
+               HostName = "192.168.99.100",
+               Port = AmqpTcpEndpoint.UseDefaultPort
             };
 
-            using (var connection = factory.CreateConnection())
+            var connection = factory.CreateConnection();
                 using(var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(

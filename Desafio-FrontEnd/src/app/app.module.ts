@@ -12,6 +12,8 @@ import { MarcasPagePage } from './pages/marcas-page/marcas-page.page';
 import { ProprietariosPagePage } from './pages/proprietarios-page/proprietarios-page.page';
 import { VeiculosPagePage } from './pages/veiculos-page/veiculos-page.page';
 
+// Mdbootstrap
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 // PrimeNg Modules
 import { AccordionModule } from 'primeng/accordion';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -31,7 +33,8 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     AccordionModule,
-    HttpClientModule
+    HttpClientModule,
+    MdbCollapseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
