@@ -47,7 +47,8 @@ namespace Desafio.Domain.Services
             #region Qeue
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost",
+                HostName = "bunny",
+                Port = 5672
             };
             using (var connection = factory.CreateConnection()) 
                 using(var channel = connection.CreateModel())

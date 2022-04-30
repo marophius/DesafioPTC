@@ -88,7 +88,7 @@ namespace Desafio.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Houve um erro interno de servidor!");
+                return StatusCode(500, ex.Message);
             }
         }
 

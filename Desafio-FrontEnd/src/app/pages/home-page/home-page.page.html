@@ -1,54 +1,48 @@
 <section class="cards row">
     <section class="col-sm-4">
-        <div @flyInOut class="card" style="width: 18rem;">
+        <div @fadeInLeft class="card" style="width: 18rem;">
             <img src="https://mdbootstrap.com/img/new/standard/city/062.webp" class="card-img-top" alt="..." />
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Marcas</h5>
                 <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.
+                    Adicione, altere ou verifique o estado das marcas que foram cadastradas em nosso sistema!
                 </p>
             </div>
         
             <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a [routerLink]="['/veiculos']" class="card-link btn btn-danger"><i class="fas fa-car text-light"></i></a>
             </div>
         </div>
     </section>
 
     <section class="col-sm-4">
-        <div @flyInOut1 class="card" style="width: 18rem;">
+        <div @fadeInLeft1 class="card" style="width: 18rem;">
             <img src="https://mdbootstrap.com/img/new/standard/city/062.webp" class="card-img-top" alt="..." />
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Proprietários</h5>
                 <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.
+                    Pesquise os proprietários e seus respectivos veículos em nossa base!
                 </p>
             </div>
         
             <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a [routerLink]="['/proprietarios']" class="card-link btn btn-info"><i class="fas fa-user-alt text-light"></i></a>
             </div>
         </div>
     </section>
 
     <section class="col-sm-4">
-        <div @flyInOut2 class="card" style="width: 18rem;">
+        <div @fadeInLeft2 class="card" style="width: 18rem;">
             <img src="https://mdbootstrap.com/img/new/standard/city/062.webp" class="card-img-top" alt="..." />
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Veículos</h5>
                 <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.
+                    Veja nossos maravilhosos veículos que foram cadastrados em nossa base!
                 </p>
             </div>
         
             <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a [routerLink]="['/veiculos']" class="card-link btn btn-warning"><i class="fas fa-bus-alt text-light"></i></a>
             </div>
         </div>
     </section>

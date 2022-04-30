@@ -2,6 +2,7 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using System.Net.Mail;
 using System.Text;
 using System.Text.Json;
 
@@ -12,11 +13,11 @@ namespace Desafio.Qeue.Consumer
         public static void Main(string[] args)
         {
             var factory = new ConnectionFactory(){
-               HostName = "192.168.99.100",
-               Port = AmqpTcpEndpoint.UseDefaultPort
+               HostName = "bunny",
+               Port = 5672
             };
 
-            var connection = factory.CreateConnection();
+            using (var connection = factory.CreateConnection())
                 using(var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(
@@ -31,10 +32,33 @@ namespace Desafio.Qeue.Consumer
 
                 consumer.Received += (model, ea) =>
                 {
-                    var body = ea.Body.ToArray();
-                    var message = Encoding.UTF8.GetString(body);
-                    var veiculo = JsonSerializer.Deserialize<Veiculo>(message);
-                    Console.WriteLine($"[x] Received {veiculo.Modelo} - {veiculo.AnoFabricacao} - {veiculo.AnoModelo}");
+                    try
+                    {
+                        var body = ea.Body.ToArray();
+                        var message = Encoding.UTF8.GetString(body);
+                        var veiculo = JsonSerializer.Deserialize<Veiculo>(message);
+
+                        Console.WriteLine($"[x] Received {veiculo.Modelo} - {veiculo.AnoFabricacao} - {veiculo.AnoModelo}");
+
+                        channel.BasicAck(ea.DeliveryTag, false);
+
+                        var smtp = new SmtpClient
+                        {
+                            EnableSsl = true,
+
+                        };
+
+                        if (veiculo.Proprietario.Email.Contains("@gmail.com"))
+                        {
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+
+                        }
+                    }
+                    catch (Exception ex) {
+
+                        channel.BasicNack(ea.DeliveryTag, false, true);
+                    }
                     
                    
                 };

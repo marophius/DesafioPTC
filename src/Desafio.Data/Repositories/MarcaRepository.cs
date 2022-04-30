@@ -50,7 +50,7 @@ namespace Desafio.Data.Repositories
 
         public async Task<List<Marca>> SomenteAtivos()
         {
-            return await _context.Marcas.Where(m => m.Status == EStatus.Ativo).AsNoTracking().ToListAsync();
+            return await _context.Marcas.Where(m => m.Status == EStatus.Ativo).AsNoTracking().Include(x => x.Veiculos).ToListAsync();
         }
     }
 }

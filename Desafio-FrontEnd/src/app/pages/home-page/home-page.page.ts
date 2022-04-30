@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home-page.page.html',
   styleUrls: ['./home-page.page.scss'],
   animations: [
-    trigger('flyInOut', [
+    trigger('fadeInLeft', [
       state('in', style({ opacity:1,transform: 'translateX(0)' })),
       transition('void => *', [
         style({ opacity:0,transform: 'translateX(-200%)' }),
@@ -16,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
         animate(2000, style({ opacity:0,transform: 'translateX(-200%)' }))
       ])
     ]),
-    trigger('flyInOut1', [
+    trigger('fadeInLeft1', [
       state('in', style({ opacity:1,transform: 'translateX(0)' })),
       transition('void => *', [
         style({ opacity:0,transform: 'translateX(-200%)' }),
@@ -26,7 +26,7 @@ import { Component, OnInit } from '@angular/core';
         animate(1500, style({ opacity:0,transform: 'translateX(-200%)' }))
       ])
     ]),
-    trigger('flyInOut2', [
+    trigger('fadeInLeft2', [
       state('in', style({ opacity:1,transform: 'translateX(0)' })),
       transition('void => *', [
         style({ opacity:0,transform: 'translateX(-200%)' }),
