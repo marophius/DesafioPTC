@@ -1,3 +1,10 @@
-section.cards {
-    margin: 3% 20%;
+@media (min-width: 992px) {
+    section.cards {
+        margin: 3% 20%;
+    }
+    
+    div.card > img {
+        height: 192px;
+        width: 288px;
+    }
 }

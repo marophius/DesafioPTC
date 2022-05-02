@@ -1,1 +1,32 @@
-<p>marcas-page works!</p>
+<section class="table-section">
+    <button class="btn btn-primary" (click)="abrirModalFormulario()">Adicionar</button>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let marca of marcas; let i = index">
+            <td>#{{i + 1}}</td>
+            <td>{{marca.nome}}</td>
+            <td *ngIf="marca.status == 0"> Ativado</td>
+            <td *ngIf="marca.status == 1"> Cancelado</td>
+            <td *ngIf="marca.status == 0">
+                <button type="button" class="btn btn-danger btn-floating" (click)="alterarStatus(marca)" pTooltip="Cancelar" tooltipPosition="top">
+                    <i class="fas fa-times"></i>
+                </button>
+            </td>
+            <td *ngIf="marca.status == 1">
+                <button type="button" class="btn btn-success btn-floating" (click)="alterarStatus(marca)" pTooltip="Ativar" tooltipPosition="top">
+                    <i class="fas fa-check"></i>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+

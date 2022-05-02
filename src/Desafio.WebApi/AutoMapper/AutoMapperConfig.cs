@@ -10,8 +10,7 @@ namespace Desafio.WebApi.AutoMapper
         public AutoMapperConfig()
         {
             // Domain to VM
-            CreateMap<Marca, MarcaViewModel>()
-                .ForMember(d => d.Nome, o => o.MapFrom(s => s.Nome.Valor));
+            CreateMap<Marca, MarcaViewModel>().ReverseMap();
             CreateMap<Proprietario, ProprietarioViewModel>()
                 .ForMember(d => d.Nome, o => o.MapFrom(s => s.Nome.Valor))
                 .ForMember(d => d.City, o => o.MapFrom(s => s.Endereco.City))
@@ -19,12 +18,13 @@ namespace Desafio.WebApi.AutoMapper
                 .ForMember(d => d.State, o => o.MapFrom(s => s.Endereco.State))
                 .ForMember(d => d.Street, o => o.MapFrom(s => s.Endereco.Street))
                 .ForMember(d => d.Service, o => o.MapFrom(s => s.Endereco.Service))
-                .ForMember(d => d.NeighborHood, o => o.MapFrom(s => s.Endereco.NeighborHood));
-            CreateMap<Veiculo, VeiculoViewModel>();
+                .ForMember(d => d.NeighborHood, o => o.MapFrom(s => s.Endereco.NeighborHood))
+                .ForMember(d => d.Veiculos, o => o.MapFrom(s => s.Veiculos));
+            CreateMap<Veiculo, VeiculoViewModel>().ReverseMap();
 
             // VM to Domain
             CreateMap<MarcaViewModel, Marca>()
-                .ConstructUsing(p => new Marca(new Nome(p.Nome), p.Status));
+                .ConstructUsing(p => new Marca(p.Nome, p.Status));
             CreateMap<ProprietarioViewModel, Proprietario>()
                 .ConstructUsing(p => new Proprietario(new Nome(p.Nome), p.Documento, p.Email, new Endereco(p.Cep, p.State, p.NeighborHood, p.Street, p.Service, p.City), p.Status));
             CreateMap<VeiculoViewModel, Veiculo>()

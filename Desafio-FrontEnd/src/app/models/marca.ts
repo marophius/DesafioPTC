@@ -1,8 +1,9 @@
+import { Nome } from "./nome";
 import { Veiculo } from "./veiculo";
 
 export interface Marca {
-    id: string,
-    nome: string,
-    status: number,
-    veiculos: Veiculo[]
+    id?: string,
+    nome?: string,
+    status?: number,
+    veiculos?: Veiculo[]
 }

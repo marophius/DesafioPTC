@@ -47,7 +47,10 @@ namespace Desafio.Data.Repositories
 
         public async Task<Proprietario> BuscarPorDocumento(int documento)
         {
-            var proprietario = await _context.Proprietarios.AsNoTracking().FirstOrDefaultAsync(x => x.Documento == documento);
+            var proprietario = await _context.Proprietarios
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(x => x.Documento == documento);
+
             return proprietario;
         }
 

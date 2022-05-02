@@ -56,7 +56,10 @@ namespace Desafio.Data.Repositories
 
         public async Task<Veiculo> BuscarPorRenavam(int renavam)
         {
-            var veiculo = await _context.Veiculos.AsNoTracking().FirstOrDefaultAsync(x => x.Renavam == renavam);
+            var veiculo = await _context.Veiculos.AsNoTracking()
+                                                    .Include(x => x.Marca)
+                                                    .Include(x => x.Proprietario)
+                                                    .FirstOrDefaultAsync(x => x.Renavam == renavam);
 
             return veiculo;
         }

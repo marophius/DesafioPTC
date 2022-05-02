@@ -52,6 +52,18 @@ namespace Desafio.WebApi.Controllers
             return Ok(proprietario);
         }
 
+        [HttpGet("{documento:int}")]
+        public async Task<ActionResult<ProprietarioViewModel>> ObterPorDocumento([FromRoute] int documento)
+        {
+            if (documento == 0) return BadRequest("O documento não pode ser vazio!");
+
+            var proprietario = _mapper.Map<ProprietarioViewModel>(await _repository.BuscarPorDocumento(documento));
+
+            if (proprietario == null) return NotFound("Nenhum proprietário encontrado");
+
+            return Ok(proprietario);
+        }
+
         [HttpGet("somente-ativos")]
         public async Task<ActionResult<ProprietarioViewModel>> ObterProprietariosAtivos()
         {
@@ -79,11 +91,9 @@ namespace Desafio.WebApi.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest();
 
-                var proprietarioEndereco = await BuscarEndereco(proprietario);
+                await _service.Adicionar(_mapper.Map<Proprietario>(proprietario));
 
-                await _service.Adicionar(_mapper.Map<Proprietario>(proprietarioEndereco));
-
-                return CustomResponse(proprietarioEndereco);
+                return CustomResponse(proprietario);
 
             }
             catch (Exception ex)
@@ -139,9 +149,7 @@ namespace Desafio.WebApi.Controllers
 
                 if (!ModelState.IsValid) return CustomResponse(proprietario);
 
-                var proprietarioEndereco = await BuscarEndereco(proprietario);
-
-                await _service.Atualizar(_mapper.Map<Proprietario>(proprietarioEndereco));
+                await _service.Atualizar(_mapper.Map<Proprietario>(proprietario));
 
                 return Ok("Proprietário atualizado!");
 
@@ -149,22 +157,6 @@ namespace Desafio.WebApi.Controllers
             {
                 return NotFound("Nenhum proprietário encontrado!");
             }
-        }
-
-        public async Task<ProprietarioViewModel> BuscarEndereco(ProprietarioViewModel proprietario)
-        {
-            var http = new HttpClient();
-            var response = await http.GetAsync($"https://brasilapi.com.br/api/cep/v1/{proprietario.Cep}");
-            var data = await response.Content.ReadFromJsonAsync<Endereco>();
-
-            proprietario.Street = data.Street;
-            proprietario.NeighborHood = data.NeighborHood;
-            proprietario.Service = data.Service;
-            proprietario.State = data.State;
-            proprietario.City = data.City;
-
-
-            return proprietario;
         }
     }
 }

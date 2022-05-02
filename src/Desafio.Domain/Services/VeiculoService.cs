@@ -44,6 +44,10 @@ namespace Desafio.Domain.Services
                 return false;
             }
 
+            await _repository.Adicionar(veiculo);
+
+            var veiculoQeue =  await _repository.BuscarPorRenavam(veiculo.Renavam);
+
             #region Qeue
             var factory = new ConnectionFactory()
             {
@@ -60,7 +64,7 @@ namespace Desafio.Domain.Services
                     autoDelete: false,
                     arguments: null);
 
-                string message = System.Text.Json.JsonSerializer.Serialize(veiculo);
+                string message = System.Text.Json.JsonSerializer.Serialize(veiculoQeue);
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish(
@@ -71,7 +75,7 @@ namespace Desafio.Domain.Services
             }
             #endregion
 
-            await _repository.Adicionar(veiculo);
+            
             return true;
         }
 

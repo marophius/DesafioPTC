@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="card">
+
+        <div class="elegant-color-dark white-text text-center py-4 card-header">
+            <h5>
+                <strong>Marca</strong>
+            </h5>
+        </div>
+
+        <!--Card content-->
+        <div class="px-lg-5 pt-0 card-body">
+
+            <!-- Form -->
+            <form class="" style="color: #757575;" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                <div class="form-row">
+                    <div class="col">
+
+                        <div class="md-form">
+                            <label mdbLabel for="nome">Nome</label>
+                            <input mdbInput [(ngModel)]="marca.nome" type="text" id="nome" placeholder="ex.: Paulo"
+                                class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+                   'is-valid': nome.valid && (nome.dirty || nome.touched)
+                 }" #nome="ngModel" [ngModelOptions]="{standalone: true}" required>
+                 
+                            <div class="invalid-feedback" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+                                <p *ngIf="nome.errors">
+                                    Por favor insira um nome válido.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <div class="md-form">
+                            <label mdbLabel for="status">Status</label>
+                            <p-dropdown mdbInput [options]="marcaStatus" #status="ngModel" ngModel placeholder="selecionar" optionLabel="name" [showClear]="false"></p-dropdown>
+                            <!-- <input [(ngModel)]="marca.status" name="status" type="text" id="status"
+                                 class="form-control" mdbInput #status="ngModel" [ngModelOptions]="{standalone: true}" required> -->
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <button  color="dark" outline="true" rounded="true" block="true"
+                    class="my-4 waves-effect z-depth-0 btn btn-primary" mdbWavesEffect type="submit">Salvar</button>
+
+            </form>
+            <!-- Form -->
+
+        </div>
+        <!--card-body-->
+
+    </div>
+    <!--card-->
+</div>

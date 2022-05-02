@@ -24,8 +24,8 @@ export class MarcaService {
     private http:HttpClient
     ) { }
 
-    public obterMarcas(): Observable<HttpResponse<Marca[]>> {
-      return this.http.get<HttpResponse<Marca[]>>(this.apiUrl + '/Marca', {headers: this.headersDefault, observe: 'body'});
+    public obterMarcas(): Observable<Marca[]> {
+      return this.http.get<Marca[]>(this.apiUrl + '/Marca', {headers: this.headersDefault, observe: 'body'});
     }
 
     public obterMarcasAtivas(): Observable<Marca[]> {

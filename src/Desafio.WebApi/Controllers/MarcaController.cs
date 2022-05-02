@@ -30,7 +30,7 @@ namespace Desafio.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<List<MarcaViewModel>>> ObterTodas()
         {
-            var marcas = _mapper.Map<List<MarcaViewModel>>(await _repository.Buscar());
+            var marcas = _mapper.Map<List<MarcaViewModel>>(await _repository.BuscarMarcasVeiculos());
 
             if(marcas == null) return NotFound();
 
@@ -52,6 +52,26 @@ namespace Desafio.WebApi.Controllers
                 return Ok(marca);
 
             }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{nome}")]
+        public async Task<ActionResult<MarcaViewModel>> ObterPorNome(string nome)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(nome)) return NotFound("O Id não pode ser nulo");
+
+                var marca = _mapper.Map<MarcaViewModel>(await _repository.BuscarPorNome(nome));
+
+                if (marca == null) return NotFound();
+
+                return Ok(marca);
+
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

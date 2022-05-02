@@ -20,10 +20,15 @@ namespace Desafio.WebApi.ViewModels
         public string Email { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public string Cep { get; set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public string State { get; set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public string City { get; set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public string NeighborHood { get; set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public string Street { get; set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public string Service { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public EStatus Status { get;  set; }

@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: src/Desafio.WebApi/Dockerfile
+    ports: 
+       - 49524:443
     networks:
         - my-network-name
 

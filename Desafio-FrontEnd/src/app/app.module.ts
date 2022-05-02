@@ -4,20 +4,32 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Components
 import { HomePagePage } from './pages/home-page/home-page.page';
 import { MarcasPagePage } from './pages/marcas-page/marcas-page.page';
 import { ProprietariosPagePage } from './pages/proprietarios-page/proprietarios-page.page';
 import { VeiculosPagePage } from './pages/veiculos-page/veiculos-page.page';
-
-// Mdbootstrap
-import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-// PrimeNg Modules
-import { AccordionModule } from 'primeng/accordion';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MarcaFormComponent } from './components/marca-form/marca-form.component';
+// Mdbootstrap
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms'
+// PrimeNg Modules
+import { AccordionModule } from 'primeng/accordion';
+import { TableModule } from 'primeng/table';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,15 +38,27 @@ import { FooterComponent } from './components/footer/footer.component';
     ProprietariosPagePage,
     VeiculosPagePage,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    MarcaFormComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AccordionModule,
     HttpClientModule,
-    MdbCollapseModule
+    FormsModule,
+    ReactiveFormsModule,
+    MdbCollapseModule,
+    TableModule,
+    InputSwitchModule,
+    ButtonModule,
+    TooltipModule,
+    MdbModalModule,
+    MdbFormsModule,
+    InputTextModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

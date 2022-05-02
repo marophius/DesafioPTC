@@ -27,5 +27,7 @@ namespace Desafio.WebApi.ViewModels
 
         [Required(ErrorMessage = "O campo {0} é obrigatório!")]
         public EVeiculoStatus Status { get; set; }
+        public MarcaViewModel? Marca { get; set; }
+        public ProprietarioViewModel? Proprietario { get; set; }
     }
 }

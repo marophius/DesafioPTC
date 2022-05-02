@@ -32,9 +32,17 @@ namespace Desafio.Data.Repositories
             return marca;
         }
 
+        public async Task<List<Marca>> BuscarMarcasVeiculos()
+        {
+            var marcas = await _context.Marcas.AsNoTracking().Include(x => x.Veiculos).ToListAsync();
+
+            return marcas;
+        }
+
         public async Task<Marca> BuscarPorNome(string nome)
         {
-            var marca = await _context.Marcas.AsNoTracking().FirstOrDefaultAsync(x => x.Nome.Valor == nome);
+            var marca = await _context.Marcas.AsNoTracking()
+                                            .FirstOrDefaultAsync(x => x.Nome.Valor == nome);
             return marca;
         }
 
@@ -50,7 +58,7 @@ namespace Desafio.Data.Repositories
 
         public async Task<List<Marca>> SomenteAtivos()
         {
-            return await _context.Marcas.Where(m => m.Status == EStatus.Ativo).AsNoTracking().Include(x => x.Veiculos).ToListAsync();
+            return await _context.Marcas.Where(m => m.Status == EStatus.Ativo).AsNoTracking().ToListAsync();
         }
     }
 }

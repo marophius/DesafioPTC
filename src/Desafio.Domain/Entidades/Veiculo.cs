@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Desafio.Domain.Entidades
@@ -37,10 +38,10 @@ namespace Desafio.Domain.Entidades
 
         }
         public Guid ProprietarioId { get; private set; }
-        public Proprietario Proprietario { get; private set; }
+        public  Proprietario Proprietario { get; private set; }
         public int Renavam { get; private set; }
         public Guid MarcaId { get; private set; }
-        public Marca Marca { get; private set; }
+        public  Marca Marca { get; private set; }
         public string Modelo { get; private set; }
         public int AnoFabricacao { get; private set; }
         public int AnoModelo { get; private set; }
