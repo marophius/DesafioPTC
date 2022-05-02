@@ -38,6 +38,7 @@ namespace Desafio.Domain.Entidades
 
         }
         public Guid ProprietarioId { get; private set; }
+
         public  Proprietario Proprietario { get; private set; }
         public int Renavam { get; private set; }
         public Guid MarcaId { get; private set; }

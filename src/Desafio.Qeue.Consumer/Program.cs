@@ -76,7 +76,7 @@ namespace Desafio.Qeue.Consumer
             smtp.Host = "smtp-mail.outlook.com";
             smtp.Port = 587;
             smtp.EnableSsl = true;
-            smtp.Credentials = new NetworkCredential("ifelix03@hotmail.com", "menezes");
+            smtp.Credentials = new NetworkCredential("seu-email-aqui", "sua-senha-aqui");
             email.From = new MailAddress("ifelix03@hotmail.com");
             email.Body = "Seu veículo foi cadastrado com sucesso!";
             email.Subject = $"{veiculo.Modelo} - {veiculo.AnoModelo} [Cadastrado]";

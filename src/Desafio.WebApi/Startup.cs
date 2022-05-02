@@ -1,6 +1,7 @@
 ﻿using Desafio.Data;
 using Desafio.WebApi.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Desafio.WebApi
 {
@@ -15,7 +16,7 @@ namespace Desafio.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DesafioDatabase")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();

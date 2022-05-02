@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Desafio.Domain.Entidades
 {
+    [Serializable]
     public class Proprietario : Entity
     {
         public Proprietario(Nome nome, int documento, string email, Endereco endereco, EStatus status)
