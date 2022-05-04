@@ -5,41 +5,47 @@
             <h5>
                 <strong>Marca</strong>
             </h5>
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
         </div>
 
         <!--Card content-->
         <div class="px-lg-5 pt-0 card-body">
 
             <!-- Form -->
-            <form class="" style="color: #757575;" #f="ngForm" (ngSubmit)="onSubmit(f)">
-                <div class="form-row">
-                    <div class="col">
+            <form class="" style="color: #757575;" #f="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-row row">
+                    <div class="col-md-6">
 
                         <div class="md-form">
                             <label mdbLabel for="nome">Nome</label>
-                            <input mdbInput [(ngModel)]="marca.nome" type="text" id="nome" placeholder="ex.: Paulo"
+                            <input mdbInput  [(ngModel)]="marca.nome!.valor"  name="valor"  type="text" id="nome" placeholder="ex.: Mitsubishi"
                                 class="form-control" mdbInput [ngClass]="{
-                  'is-invalid': nome.invalid && (nome.dirty || nome.touched),
-                   'is-valid': nome.valid && (nome.dirty || nome.touched)
-                 }" #nome="ngModel" [ngModelOptions]="{standalone: true}" required>
+                                    'is-invalid': valor.invalid && (valor.dirty || valor.touched),
+                                     'is-valid': valor.valid && (valor.dirty || valor.touched)
+                                   }" #valor="ngModel" [ngModelOptions]="{standalone: true}" required/>
                  
-                            <div class="invalid-feedback" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
-                                <p *ngIf="nome.errors">
+                            <div class="invalid-feedback" *ngIf="valor.invalid && (valor.dirty || valor.touched)">
+                                <p *ngIf="valor.errors">
                                     Por favor insira um nome válido.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+
+                    <div class="col-md-6">
 
                         <div class="md-form">
                             <label mdbLabel for="status">Status</label>
-                            <p-dropdown mdbInput [options]="marcaStatus" #status="ngModel" ngModel placeholder="selecionar" optionLabel="name" [showClear]="false"></p-dropdown>
-                            <!-- <input [(ngModel)]="marca.status" name="status" type="text" id="status"
-                                 class="form-control" mdbInput #status="ngModel" [ngModelOptions]="{standalone: true}" required> -->
+                            
+                            <select [(ngModel)]="marca.status" name="status" type="number" id="status"
+                                 class="form-control" mdbInput #status="ngModel" [ngModelOptions]="{standalone: true}" required>
+                                <option value="0">Ativado</option>
+                                <option value="1">Cancelado</option>
+                            </select>
                             
                         </div>
                     </div>
+                    
                 </div>
 
                 <button  color="dark" outline="true" rounded="true" block="true"

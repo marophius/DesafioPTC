@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Marca } from 'src/app/models/marca';
 import { Nome } from 'src/app/models/nome';
 import { MarcaService } from 'src/app/services/marca.service';
@@ -14,18 +15,17 @@ export class MarcaFormComponent implements OnInit {
     {name: "Ativado", status: 0},
     {name: "Cancelado", status: 1}
   ]
-  public marca!: Marca;
+  public marca: Marca = new Marca('', new Nome(''), 0 );
   public checked: boolean = false;
   constructor(
     private marcasService: MarcaService,
+    public modalRef: MdbModalRef<MarcaFormComponent>
   ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(data: any) {
-    this.marca.nome = data.value.nome;
-    this.marca.status = data.value.status;
+  onSubmit() {
     this.marcasService.adicionarMarca(this.marca)
       .subscribe(result => {
         console.log(result);
@@ -34,6 +34,10 @@ export class MarcaFormComponent implements OnInit {
           console.log(error);
         }
       )
+  }
+
+  closeModal() {
+    this.modalRef.close();
   }
 
 }

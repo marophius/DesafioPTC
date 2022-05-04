@@ -1,1 +1,39 @@
-<p>proprietarios-page works!</p>
+<section class="table-section">
+    <button class="btn btn-primary" (click)="abrirModalFormulario()">Adicionar</button>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prop of proprietarios; let i = index">
+            <td>#{{i + 1}}</td>
+            <td>{{prop.nome}}</td>
+            <td>{{prop.email}}</td>
+            <td *ngIf="prop.status == 0"> Ativado</td>
+            <td *ngIf="prop.status == 1"> Cancelado</td>
+            <td *ngIf="prop.status == 0">
+                <button type="button" class="btn btn-danger btn-floating" (click)="alterarStatus(prop)" pTooltip="Cancelar" tooltipPosition="top">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-floating" (click)="abrirModalFormularioData(prop)" pTooltip="Editar" tooltipPosition="top">
+                    <i class="fas fa-times"></i>
+                </button>
+            </td>
+            <td *ngIf="prop.status == 1">
+                <button type="button" class="btn btn-success btn-floating" (click)="alterarStatus(prop)" pTooltip="Ativar" tooltipPosition="top">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-floating" (click)="abrirModalFormularioData(prop)" pTooltip="Editar" tooltipPosition="top">
+                    <i class="fas fa-times"></i>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>

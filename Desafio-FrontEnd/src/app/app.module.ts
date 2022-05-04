@@ -24,9 +24,11 @@ import { TableModule } from 'primeng/table';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { ProprietarioFormComponent } from './components/proprietario-form/proprietario-form.component';
+import { NgBrazil } from 'ng-brazil';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 
@@ -39,7 +41,8 @@ import { InputTextModule } from 'primeng/inputtext';
     VeiculosPagePage,
     NavbarComponent,
     FooterComponent,
-    MarcaFormComponent
+    MarcaFormComponent,
+    ProprietarioFormComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +61,9 @@ import { InputTextModule } from 'primeng/inputtext';
     MdbModalModule,
     MdbFormsModule,
     InputTextModule,
-    DropdownModule
+    CascadeSelectModule,
+    NgBrazil,
+    TextMaskModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

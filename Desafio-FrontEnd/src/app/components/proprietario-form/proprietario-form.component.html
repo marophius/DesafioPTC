@@ -1,0 +1,184 @@
+<div class="container">
+
+    <section class="elegant-color-dark white-text text-center py-4 modal-header">
+        <h5>
+            <strong>Proprietario</strong>
+        </h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"
+            (click)="closeModal()"></button>
+    </section>
+
+    <!--Card content-->
+
+    <section class="modal-body">
+        <!-- Form -->
+        <form class="" style="color: #757575;" #f="ngForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-row">
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="nome">Nome</label>
+                        <input [(ngModel)]="proprietario.nome!.valor" name="nome" type="text" id="nome"
+                            placeholder="ex.: Paulo" class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+                   'is-valid': nome.valid && (nome.dirty || nome.touched)
+                 }" #nome="ngModel" [ngModelOptions]="{standalone: true}" required minlength="3">
+
+                        <div class="invalid-feedback" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+                            <p *ngIf="nome.errors">
+                                Por favor insira um nome válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="documento">Documento</label>
+                        <input [(ngModel)]="proprietario.documento" cpf [textMask]="{mask: MASKS['cpf'].textMask}"
+                            name="documento" type="text" id="documento" placeholder="ex.: 452.912.643-18"
+                            class="form-control" mdbInput class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': cpf.invalid && (cpf.dirty || cpf.touched),
+                   'is-valid': cpf.valid && (cpf.dirty || cpf.touched)
+                 }" #cpf="ngModel" [ngModelOptions]="{standalone: true}" required minlength="11">
+
+
+                        <div class="invalid-feedback" *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+                            <p *ngIf="cpf.errors">
+                                Por favor insira um cpf válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="email">Email</label>
+                        <input [(ngModel)]="proprietario.email" name="email" type="text" id="email"
+                            placeholder="ex.: seuemail@online.com" class="form-control" mdbInput class="form-control"
+                            mdbInput [ngClass]="{
+                  'is-invalid': email.invalid && (email.dirty || email.touched),
+                   'is-valid': email.valid && (email.dirty || email.touched)
+                 }" #email="ngModel" email [ngModelOptions]="{standalone: true}" required minlength="10">
+
+                        <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+                            <p *ngIf="email.errors">
+                                Por favor insira um email válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="dataNascimento">CEP</label>
+                        <input [(ngModel)]="proprietario.endereco!.cep" cep [textMask]="{mask: MASKS['cep'].textMask}"
+                            name="cep" type="text" id="cep" class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': cep.invalid && (cep.dirty || cep.touched),
+                   'is-valid': cep.valid && (cep.dirty || cep.touched)
+                 }" #cep="ngModel" [ngModelOptions]="{standalone: true}" required (change)="onChange()">
+
+                        <div class="invalid-feedback" *ngIf="cep.invalid && (cep.dirty || cep.touched)">
+                            <p *ngIf="cep.errors">
+                                Por favor insira um CEP válida.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="telefone">Estado</label>
+                        <input [(ngModel)]="proprietario.endereco!.state" telefone disabled name="state" type="text"
+                            id="state" class="form-control" mdbInput mdbInput [ngClass]="{
+                  'is-invalid': state.invalid && (state.dirty || state.touched),
+                   'is-valid': state.valid && (state.dirty || state.touched)
+                 }" #state="ngModel" [ngModelOptions]="{standalone: true}" required maxlength="2">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+
+                <div class="md-form">
+                    <label for="city">Cidade</label>
+                    <input [(ngModel)]="proprietario.endereco!.city" name="city" type="text" id="city"
+                        class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': city.invalid && (city.dirty || city.touched),
+                   'is-valid': city.valid && (city.dirty || city.touched)
+                 }" #city="ngModel" [ngModelOptions]="{standalone: true}" disabled required minlength="4">
+
+                </div>
+            </div>
+
+            <div class="col">
+
+                <div class="md-form">
+                    <label for="neighborhood">Região</label>
+                    <input [(ngModel)]="proprietario.endereco!.neighborhood" name="neighborhood" type="text"
+                        id="neighborhood" class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': neighborhood.invalid && (neighborhood.dirty || neighborhood.touched || neighborhood.untouched),
+                   'is-valid': neighborhood.valid && (neighborhood.dirty || neighborhood.touched)
+                 }" #neighborhood="ngModel" [ngModelOptions]="{standalone: true}" disabled required minlength="4">
+
+                </div>
+            </div>
+
+            <div class="col">
+
+                <div class="md-form">
+                    <label for="street">Rua</label>
+                    <input [(ngModel)]="proprietario.endereco!.street" name="street" type="text" id="street"
+                        class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': street.invalid && (street.dirty || street.touched),
+                   'is-valid': street.valid && (street.dirty || street.touched)
+                 }" #street="ngModel" [ngModelOptions]="{standalone: true}" disabled required minlength="4">
+
+                </div>
+            </div>
+
+            <div class="col">
+
+                <div class="md-form">
+                    <label for="service">Serviço</label>
+                    <input [(ngModel)]="proprietario.endereco!.service" name="service" type="text" id="service"
+                        class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': service.invalid && (service.dirty || service.touched),
+                   'is-valid': service.valid && (service.dirty || service.touched)
+                 }" #service="ngModel" [ngModelOptions]="{standalone: true}" disabled required minlength="4">
+
+                </div>
+                <label mdbLabel for="status">Status</label>
+
+                <select [(ngModel)]="proprietario.status" name="status" type="number" id="status" class="form-control"
+                    mdbInput #status="ngModel" [ngModelOptions]="{standalone: true}" required>
+                    <option value="0">Ativado</option>
+                    <option value="1">Cancelado</option>
+                </select>
+            </div>
+
+
+
+            <div class="col">
+                <button color="dark" outline="true" rounded="true" block="true" style="width: 100%;"
+                    class="my-4 waves-effect z-depth-0 btn btn-info" mdbWavesEffect type="submit">Salvar</button>
+            </div>
+
+        </form>
+        <!-- Form -->
+
+    </section>
+
+</div>

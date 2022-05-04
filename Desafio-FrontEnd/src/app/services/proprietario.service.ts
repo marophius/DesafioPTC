@@ -24,11 +24,23 @@ export class ProprietarioService {
     private http: HttpClient
   ) { }
 
-  public obterTodos(): Observable<HttpResponse<Proprietario[]>> {
-    return this.http.get<HttpResponse<Proprietario[]>>(this.apiUrl + '/Proprietario');
+  public obterTodos(): Observable<Proprietario[]> {
+    return this.http.get<Proprietario[]>(this.apiUrl + '/Proprietario');
   }
 
-  public obterPorId(id: string): Observable<HttpResponse<Proprietario>> {
-    return this.http.get<HttpResponse<Proprietario>>(this.apiUrl + '/Proprietario/' +id);
+  public obterAtivos(): Observable<Proprietario[]> {
+    return this.http.get<Proprietario[]>(this.apiUrl + '/Proprietario/somente-ativos', {headers: this.headersDefault});
+  }
+
+  public adicionarProprietario(proprietario: Proprietario): Observable<Proprietario> {
+    return this.http.post<Proprietario>(this.apiUrl + '/Proprietario', proprietario);
+  }
+
+  public alterarStatus(id: string, proprietario: Proprietario): Observable<HttpResponse<Proprietario>> {
+    return this.http.put<HttpResponse<Proprietario>>(this.apiUrl + '/Proprietario/alterar-status/' + id, proprietario);
+  }
+
+  public alterarProprietario(id: string, proprietario: Proprietario): Observable<HttpResponse<Proprietario>> {
+    return this.http.put<HttpResponse<Proprietario>>(this.apiUrl + '/Proprietario/' + id, proprietario);
   }
 }
