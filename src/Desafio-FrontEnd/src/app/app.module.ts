@@ -29,6 +29,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { ProprietarioFormComponent } from './components/proprietario-form/proprietario-form.component';
 import { NgBrazil } from 'ng-brazil';
 import { TextMaskModule } from 'angular2-text-mask';
+import { VeiculoFormComponent } from './components/veiculo-form/veiculo-form.component';
 
 
 
@@ -43,6 +44,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     FooterComponent,
     MarcaFormComponent,
     ProprietarioFormComponent,
+    VeiculoFormComponent,
   ],
   imports: [
     CommonModule,

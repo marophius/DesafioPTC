@@ -25,7 +25,7 @@
                                    }" #valor="ngModel" [ngModelOptions]="{standalone: true}" required/>
                  
                             <div class="invalid-feedback" *ngIf="valor.invalid && (valor.dirty || valor.touched)">
-                                <p *ngIf="valor.errors">
+                                <p *ngIf="valor.errors?.['required']">
                                     Por favor insira um nome válido.
                                 </p>
                             </div>

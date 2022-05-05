@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { Veiculo } from 'src/app/models/veiculo';
+import { MASKS } from 'ng-brazil';
 @Component({
   selector: 'app-veiculo-form',
   templateUrl: './veiculo-form.component.html',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VeiculoFormComponent implements OnInit {
 
-  constructor() { }
+  public MASKS = MASKS;
+  public veiculo: Veiculo = new Veiculo();
+
+  constructor(
+    public modalRef: MdbModalRef<VeiculoFormComponent>
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  closeModal() {
+    this.modalRef.close();
+  }
+
+  onSubmit() {
+
   }
 
 }

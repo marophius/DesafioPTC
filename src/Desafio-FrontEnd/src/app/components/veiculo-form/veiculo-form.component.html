@@ -1,1 +1,149 @@
-<p>veiculo-form works!</p>
+<div class="container">
+
+    <section class="elegant-color-dark white-text text-center py-4 modal-header">
+        <h5>
+            <strong>Veículo</strong>
+        </h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"
+            (click)="closeModal()"></button>
+    </section>
+
+    <!--Card content-->
+
+    <section class="modal-body">
+        <!-- Form -->
+        <form class="" style="color: #757575;" #f="ngForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-row">
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="modelo">Modelo</label>
+                        <input [(ngModel)]="veiculo!.modelo" name="modelo" type="text" id="modelo"
+                            placeholder="ex.: Paulo" class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': modelo.invalid && (modelo.dirty || modelo.touched),
+                   'is-valid': modelo.valid && (modelo.dirty || modelo.touched)
+                 }" #modelo="ngModel" [ngModelOptions]="{standalone: true}" required minlength="3">
+
+                        <div class="invalid-feedback" *ngIf="modelo.invalid && (modelo.dirty || modelo.touched)">
+                            <p *ngIf="modelo.errors?.['required'] && modelo.errors?.['minlength']"> 
+                                Por favor insira um modelo válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="renavam">Renavam</label>
+                        <input [(ngModel)]="veiculo!.renavam" cpf [textMask]="{mask: MASKS['cpf'].textMask}"
+                            name="renavam" type="text" id="renavam" placeholder="ex.: 452.912.643-18"
+                            class="form-control" mdbInput class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': renavam.invalid && (renavam.dirty || renavam.touched),
+                   'is-valid': renavam.valid && (renavam.dirty || renavam.touched)
+                 }" #renavam="ngModel" [ngModelOptions]="{standalone: true}" required minlength="11">
+
+
+                        <div class="invalid-feedback" *ngIf="renavam.invalid && (renavam.dirty || renavam.touched)">
+                            <p *ngIf="renavam.errors?.['required']">
+                                Por favor insira um renavam válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="anoFabricacao">Ano de fabricação</label>
+                        <input [(ngModel)]="veiculo!.anoFabricacao" name="anoFabricacao" type="number" id="email"
+                            placeholder="ex.: 1997" class="form-control" mdbInput class="form-control"
+                            mdbInput [ngClass]="{
+                  'is-invalid': anoFabricacao.invalid && (anoFabricacao.dirty || anoFabricacao.touched),
+                   'is-valid': anoFabricacao.valid && (anoFabricacao.dirty || anoFabricacao.touched)
+                 }" #anoFabricacao="ngModel" [ngModelOptions]="{standalone: true}" required maxlength="4">
+
+                        <div class="invalid-feedback" *ngIf="anoFabricacao.invalid && (anoFabricacao.dirty || anoFabricacao.touched)">
+                            <p *ngIf="anoFabricacao.errors?.['required']">
+                                Por favor insira um ano válido válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="anoModelo">Ano do Modelo</label>
+                        <input [(ngModel)]="veiculo!.anoModelo" placeholder="ex.: 1997"
+                            name="anoModelo" type="number" id="anoModelo" class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': anoModelo.invalid && (anoModelo.dirty || anoModelo.touched),
+                   'is-valid': anoModelo.valid && (anoModelo.dirty || anoModelo.touched)
+                 }" #anoModelo="ngModel" [ngModelOptions]="{standalone: true}" required maxlength="4">
+
+                        <div class="invalid-feedback" *ngIf="anoModelo.invalid && (anoModelo.dirty || anoModelo.touched)">
+                            <p *ngIf="anoModelo.errors?.['required']">
+                                Por favor insira um ano de modelo válido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+
+                    <div class="md-form">
+                        <label for="quilometragem">Quilômetragem</label>
+                        <input [(ngModel)]="veiculo!.quilometragem" telefone disabled name="quilometragem" type="number"
+                            id="state" class="form-control" mdbInput mdbInput [ngClass]="{
+                  'is-invalid': quilometragem.invalid && (quilometragem.dirty || quilometragem.touched),
+                   'is-valid': quilometragem.valid && (quilometragem.dirty || quilometragem.touched)
+                 }" #quilometragem="ngModel" [ngModelOptions]="{standalone: true}" required>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+
+                <div class="md-form">
+                    <label for="valor">Valor</label>
+                    <input [(ngModel)]="veiculo!.valor" name="valor" type="number" id="valor"
+                        class="form-control" mdbInput [ngClass]="{
+                  'is-invalid': valor.invalid && (valor.dirty || valor.touched),
+                   'is-valid': valor.valid && (valor.dirty || valor.touched)
+                 }" #valor="ngModel" [ngModelOptions]="{standalone: true}" disabled required minlength="4">
+
+                </div>
+            </div>
+
+            <div class="col">
+                <label mdbLabel for="status">Status</label>
+
+                <select [(ngModel)]="veiculo!.status" name="status" type="number" id="status" class="form-control"
+                    mdbInput #status="ngModel" [ngModelOptions]="{standalone: true}" required>
+                    <option value="0">Disponível</option>
+                    <option value="1">Indisponível</option>
+                    <option value="2">Vendido</option>
+                </select>
+            </div>
+
+
+
+            <div class="col">
+                <button color="dark" outline="true" rounded="true" block="true" style="width: 100%;"
+                    class="my-4 waves-effect z-depth-0 btn btn-info" mdbWavesEffect type="submit">Salvar</button>
+            </div>
+
+        </form>
+        <!-- Form -->
+
+    </section>
+
+</div>

@@ -6,7 +6,6 @@ import { ProprietarioService } from 'src/app/services/proprietario.service';
 import { MASKS } from 'ng-brazil';
 import { EnderecoService } from 'src/app/services/endereco.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-proprietario-form',

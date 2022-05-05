@@ -26,7 +26,7 @@
                  }" #nome="ngModel" [ngModelOptions]="{standalone: true}" required minlength="3">
 
                         <div class="invalid-feedback" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
-                            <p *ngIf="nome.errors">
+                            <p *ngIf="nome.errors?.['required']">
                                 Por favor insira um nome válido.
                             </p>
                         </div>
@@ -49,7 +49,7 @@
 
 
                         <div class="invalid-feedback" *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
-                            <p *ngIf="cpf.errors">
+                            <p *ngIf="cpf.errors?.['required']">
                                 Por favor insira um cpf válido.
                             </p>
                         </div>
@@ -68,7 +68,7 @@
                  }" #email="ngModel" email [ngModelOptions]="{standalone: true}" required minlength="10">
 
                         <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
-                            <p *ngIf="email.errors">
+                            <p *ngIf="email.errors?.['required']">
                                 Por favor insira um email válido.
                             </p>
                         </div>
@@ -88,7 +88,7 @@
                  }" #cep="ngModel" [ngModelOptions]="{standalone: true}" required (change)="onChange()">
 
                         <div class="invalid-feedback" *ngIf="cep.invalid && (cep.dirty || cep.touched)">
-                            <p *ngIf="cep.errors">
+                            <p *ngIf="cep.errors?.['required']">
                                 Por favor insira um CEP válida.
                             </p>
                         </div>
