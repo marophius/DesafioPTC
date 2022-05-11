@@ -14,7 +14,9 @@ export class VeiculoFormComponent implements OnInit {
 
   constructor(
     public modalRef: MdbModalRef<VeiculoFormComponent>
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit(): void {
   }

@@ -15,22 +15,22 @@
             <td>#{{i + 1}}</td>
             <td>{{veiculo.modelo}}</td>
             <td>{{veiculo.renavam}}</td>
-            <td *ngIf="prop.status == 0"> Disponivel</td>
-            <td *ngIf="prop.status == 1"> Indisponivel</td>
-            <td *ngIf="prop.status == 2"> Vendido</td>
-            <td *ngIf="prop.status == 0">
-                <button type="button" class="btn btn-danger btn-floating" (click)="alterarStatus(prop)" pTooltip="Cancelar" tooltipPosition="top">
+            <td *ngIf="veiculo.status == 0"> Disponivel</td>
+            <td *ngIf="veiculo.status == 1"> Indisponivel</td>
+            <td *ngIf="veiculo.status == 2"> Vendido</td>
+            <td *ngIf="veiculo.status == 0">
+                <button type="button" class="btn btn-danger btn-floating" (click)="alterarStatus(veiculo)" pTooltip="Cancelar" tooltipPosition="top">
                     <i class="fas fa-times"></i>
                 </button>
-                <button type="button" class="btn btn-danger btn-floating" (click)="abrirModalFormularioData(prop)" pTooltip="Editar" tooltipPosition="top">
+                <button type="button" class="btn btn-danger btn-floating" (click)="abrirModalFormularioData(veiculo)" pTooltip="Editar" tooltipPosition="top">
                     <i class="fas fa-times"></i>
                 </button>
             </td>
-            <td *ngIf="prop.status == 1">
-                <button type="button" class="btn btn-success btn-floating" (click)="alterarStatus(prop)" pTooltip="Ativar" tooltipPosition="top">
+            <td *ngIf="veiculo.status == 1">
+                <button type="button" class="btn btn-success btn-floating" (click)="alterarStatus(veiculo)" pTooltip="Ativar" tooltipPosition="top">
                     <i class="fas fa-check"></i>
                 </button>
-                <button type="button" class="btn btn-danger btn-floating" (click)="abrirModalFormularioData(prop)" pTooltip="Editar" tooltipPosition="top">
+                <button type="button" class="btn btn-danger btn-floating" (click)="abrirModalFormularioData(veiculo)" pTooltip="Editar" tooltipPosition="top">
                     <i class="fas fa-times"></i>
                 </button>
             </td>

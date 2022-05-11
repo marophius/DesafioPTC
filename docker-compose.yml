@@ -42,14 +42,11 @@ services:
     networks:
         - my-network-name
 
-  desafio-front-end:
-    container_name: desafio-front-end
-    image: desafio-front-end
-    build: 
-        context: ./src/Desafio-FrontEnd
-        dockerfile: src/Desafio-FrontEnd/Dockerfile
+  desafio-front:
+    container_name: desafio-front
     ports:
-        - 3000:3000
+       - '80:80'
+    image: desafio-front
 networks:
     my-network-name:
         driver: bridge
